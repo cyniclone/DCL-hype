@@ -1,3 +1,11 @@
+// External Libraries
+import processing.pdf.*;
+
+// Output configuration
+boolean vectorOutput = false;
+int pngScale = 2;
+boolean dev = true;  // If set to true will create file with timestamp
+
 void setup(){
 	size(800,800);
 	H.init(this).background(#EEEEEE).autoClear(true);
@@ -23,7 +31,7 @@ HColorPool circus = new HColorPool(#350925,#470821,#5B071D,#730517,#920410,#AC02
 //Complementary
 HColorPool comp = new HColorPool(#EEBAA0,#E1A788,#E3AA8B,#F5D5C3,#DF9C76,#F3CAB2,#D9956B,#F6D9BE,#4C2DC7,#4D2FCA,#5538CC,#5C38C5,#6443D5,#6A48CB,#6B4BCD,#7851DE,#6B4BC9,#7C58DF,#825DE3,#8764E9,#8361C4,#A489E7,#9B7BC6,#9E7BC2);
 
-HColorPool c = moth;
+HColorPool c = comp;
 
 	for (int i = 0; i < 15; i++) {
 		HShape d = new HShape("tenta.svg");
@@ -39,16 +47,54 @@ HColorPool c = moth;
 		d.randomColors(c.fillOnly());
 
 	}
-
-
-
 	
+	if (vectorOutput == true) {
+        saveVector();
+    } else {
+        saveHiRes(pngScale);
+    }
 
-	H.drawStage();
 }
  
 void draw(){
-	
-
 	// saveFrame("frames/#########.tif"); if (frameCount == 900) exit();
+	H.drawStage();
+}
+
+
+// For saving to PNG
+void saveHiRes(int scaleFactor) {
+    PGraphics hiRes = createGraphics(width*scaleFactor, height*scaleFactor, JAVA2D);
+    beginRecord(hiRes);
+    hiRes.scale(scaleFactor);
+
+    if (hiRes == null) {
+        H.drawStage();
+    } else {
+        H.stage().paintAll(hiRes, false, 1); // PGraphics, uses3d, Alpha
+    }
+
+    String fileName;
+
+    if (dev == true) {
+        fileName = "render-"+ new java.util.Date() +".png";
+    } else {
+        fileName = "render.png";
+    }
+
+    hiRes.save(fileName);
+}
+
+// For saving to Vector Graphics
+void saveVector() {
+    PGraphics tmp = null;
+    tmp = beginRecord(PDF, "render.pdf");
+
+    if (tmp == null) {
+        H.drawStage();
+    } else {
+        H.stage().paintAll(tmp, false, 1); // PGraphics, Uses 3d, alpha
+    }
+
+    endRecord();
 }
