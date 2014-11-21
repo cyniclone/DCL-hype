@@ -9,14 +9,17 @@ boolean dev = true;  // If set to true will create file with timestamp
 HDrawablePool pool;
 int cellSize = 25;
 
+// Image Credit
+// http://ow.ly/EDPlK
+
 
 void setup(){
-	size(640, 640);
+	size(675, 900);
 	H.init(this).background(#202020);
 	smooth();
 
-	HImage img = new HImage("cmoth.jpg");
-
+	// HImage img = new HImage("cmoth.jpg");
+	HImage img = new HImage("jellyfish.jpg");
 
 	final HPixelColorist colors = new HPixelColorist(img)
 		.fillOnly();
