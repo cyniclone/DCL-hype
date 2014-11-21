@@ -32,8 +32,9 @@ boolean dev = true;  // If set to true will create file with timestamp
 // Image Credit
 // http://ow.ly/EDPlK
 
-HRect d;
+
 HPixelColorist colors;
+HColorPool colorPool;
 
 public void setup(){
 	size(675, 900);
@@ -43,28 +44,76 @@ public void setup(){
 	// HImage img = new HImage("cmoth.jpg");
 	H.add(new HImage("jellyfish.jpg"));
 
-	colors = new HPixelColorist("jellyfish.jpg").fillOnly();
+	colors = new HPixelColorist("jellyfish.jpg");
 
-	for (int i = 0; i < 100; i++) {
-		d = new HRect();
+	for (int i = 0; i < 350; i++) {
+
+		HShape d = new HShape("tenta.svg");
 		d
-			.strokeWeight(1)
-			.stroke(0xff000000)
-			.size( (int)random(25,125) )
-			.rotate( (int)random(360) )
 			.loc( (int)random(width), (int)random(height) )
+		;
+
+		colorPool = new HColorPool(colors.getColor( d.x(), d.y() ));
+
+		d			
+			.noStroke()
+			.scale(0.75f)
+			.noFill()
+			// .size( (int)random(25,125) )
+			// .rotate( (int)random(360) )
+			.rotate(302)
+			
 			.anchorAt(H.CENTER)
 		;
-		colors.applyColor(d);
+		
 		H.add(d);
+		d.randomColors(colorPool.fillAndStroke());
 	}
+
+	if (vectorOutput == true) {
+        saveVector();
+    } else {
+        saveHiRes(pngScale);
+    }
 
 	H.drawStage();
 }
- 
-public void draw(){
 
-	// saveFrame("frames/#########.tif"); if (frameCount == 900) exit();
+// For saving to PNG
+public void saveHiRes(int scaleFactor) {
+    PGraphics hiRes = createGraphics(width*scaleFactor, height*scaleFactor, JAVA2D);
+    beginRecord(hiRes);
+    hiRes.scale(scaleFactor);
+
+    if (hiRes == null) {
+        H.drawStage();
+    } else {
+        H.stage().paintAll(hiRes, false, 1); // PGraphics, uses3d, Alpha
+    }
+
+    String fileName;
+
+    if (dev == true) {
+        fileName = "render-"+ new java.util.Date() +".png";
+    } else {
+        fileName = "render.png";
+    }
+
+    hiRes.save(fileName);
+}
+
+// For saving to Vector Graphics
+public void saveVector() {
+    PGraphics tmp = null;
+    tmp = beginRecord(PDF, "render.pdf");
+
+    if (tmp == null) {
+        H.drawStage();
+    } else {
+        H.stage().paintAll(tmp, false, 1); // PGraphics, Uses 3d, alpha
+    }
+
+    endRecord();
 }
 
 /*
