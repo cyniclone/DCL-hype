@@ -30,20 +30,23 @@ HColorPool circus = new HColorPool(#350925,#470821,#5B071D,#730517,#920410,#AC02
 //Complementary
 HColorPool comp = new HColorPool(#EEBAA0,#E1A788,#E3AA8B,#F5D5C3,#DF9C76,#F3CAB2,#D9956B,#F6D9BE,#4C2DC7,#4D2FCA,#5538CC,#5C38C5,#6443D5,#6A48CB,#6B4BCD,#7851DE,#6B4BC9,#7C58DF,#825DE3,#8764E9,#8361C4,#A489E7,#9B7BC6,#9E7BC2);
 
+//Birdy Nam Nam
+HColorPool bnam = new HColorPool(#EEEEEE, #6D5B42,#68684D,#64774C,#3A462D,#547843,#47753C,#1D3A1B,#356636,#152919,#221434,#492563,#3A1D4E,#58276A,#761F63,#AE206E,#771A4B,#B4266D,#7A1E4B,#A9316A,#AF1957,#85435E,#432D35,#592937,#720726,#88505D,#563C3D);
+
 HColorPool c = circus;
 
 	for (int i = 0; i < 100; i++) {
 		HShape d = new HShape("eyeframe.svg");
 		H.add(d)
 		.strokeWeight(0.25)
-		.stroke(#000000)
+		.stroke(#222222)
 		.noFill()
 		.anchorAt(H.CENTER)
 		.loc(random(width), random(height))
 		.rotation(random(360))
-		.scale(3);
+		.scale(4);
 
-		d.randomColors(c.fillOnly());
+		d.randomColors(c.fillAndStroke());
 
 	}
 

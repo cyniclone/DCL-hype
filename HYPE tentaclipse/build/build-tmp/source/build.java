@@ -27,6 +27,7 @@ boolean dev = true;  // If set to true will create file with timestamp
 
 public void setup(){
 	size(800,800);
+	// H.init(this).background(#EEEEEE).autoClear(true);
 	H.init(this).background(0xffEEEEEE).autoClear(true);
 	smooth();
 
@@ -50,19 +51,23 @@ HColorPool circus = new HColorPool(0xff350925,0xff470821,0xff5B071D,0xff730517,0
 //Complementary
 HColorPool comp = new HColorPool(0xffEEBAA0,0xffE1A788,0xffE3AA8B,0xffF5D5C3,0xffDF9C76,0xffF3CAB2,0xffD9956B,0xffF6D9BE,0xff4C2DC7,0xff4D2FCA,0xff5538CC,0xff5C38C5,0xff6443D5,0xff6A48CB,0xff6B4BCD,0xff7851DE,0xff6B4BC9,0xff7C58DF,0xff825DE3,0xff8764E9,0xff8361C4,0xffA489E7,0xff9B7BC6,0xff9E7BC2);
 
-HColorPool c = comp;
+//Birdy Nam Nam
+HColorPool bnam = new HColorPool(0xff6D5B42,0xff68684D,0xff64774C,0xff3A462D,0xff547843,0xff47753C,0xff1D3A1B,0xff356636,0xff152919,0xff221434,0xff492563,0xff3A1D4E,0xff58276A,0xff761F63,0xffAE206E,0xff771A4B,0xffB4266D,0xff7A1E4B,0xffA9316A,0xffAF1957,0xff85435E,0xff432D35,0xff592937,0xff720726,0xff88505D,0xff563C3D);
 
-	for (int i = 0; i < 15; i++) {
+HColorPool c = bnam;
+
+	for (int i = 0; i < 120; i++) {
 		HShape d = new HShape("tenta.svg");
 		H.add(d)
 		.strokeWeight(0.15f)
-		.stroke(0xff000000)
+		.stroke(0xff222222)
 		.noFill()
 		.anchorAt(H.CENTER)
-		.loc(random(width/2 - 300, width/2 + 300), random(height/2 - 100, height/2 + 400))
+		// .loc(random(width/2 - 300, width/2 + 300), random(height/2 - 100, height/2 + 400))
+		.loc(random(width), random(height))
 		.rotation(random(360))
-		.scale(random(2,2.5f));
-
+		// .scale(random(2,2.5));
+		.scale(0.75f);
 		d.randomColors(c.fillOnly());
 
 	}
