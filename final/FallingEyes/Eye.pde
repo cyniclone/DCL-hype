@@ -5,13 +5,20 @@
 
 class Eye {
 	// Needs an SVG
+  HShape shape;
 	// Needs a method to get color from HColorField
 
   Body body;
   float r;
 
   // Constructor
-  Particle(float x, float y, float r_) {
+  Eye(float x, float y, float r_) {
+    shape = new HShape("eyeframe.svg");
+    H.add(shape)
+      .anchorAt(H.CENTER)
+      .loc(x, y)
+    ;
+
     r = r_;
     // Put object in Box2D world
     makeBody(x,y,r);
@@ -40,6 +47,8 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Get its angle of rotation
     float a = body.getAngle();
+    println(degrees(a));
+
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(-a);
@@ -48,8 +57,10 @@ class Eye {
     strokeWeight(1);
     ellipse(0,0,r*2,r*2);
     // Let's add a line so we can see the rotation
-    // line(0,0,r,0);
+    line(0,0,r,0);
     popMatrix();
+
+    shape.loc(pos.x, pos.y).rotation(-degrees(a));
   }
 
   // Creating the Box2D body for the World
@@ -69,7 +80,8 @@ class Eye {
     // Parameters that affect physics
     fd.density = 1;
     fd.friction = 0.01;
-    fd.restitution = 0.3;
+    fd.restitution = 0.6; //Making these super bouncy
+    // fd.restitution = 0.3;
     
     // Attach fixture to body
     body.createFixture(fd);

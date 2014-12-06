@@ -15,24 +15,60 @@ Box2DProcessing box2d;
 // ArrayList of eye objects
 ArrayList<Eye> eyes;
 
-// An object to store information about the uneven surface
+// Object storing info about surface
 Surface surface;
 
 void setup(){
 	size(640,640);
-	// H.init(this).background(#202020).autoClear(false);
+	H.init(this).background(#202020).autoClear(false);
 	smooth();
 
 	// Setup Box2D world and gravity
+	box2d = new Box2DProcessing(this);
+	box2d.createWorld();
+	box2d.setGravity(0, -20);
+
+	eyes = new ArrayList<Eye>(); // Initialize ArrayList
+	surface = new Surface(); // Initialize surface
 }
  
 void draw(){
-	// H.drawStage();
+	background(255);
 	// Spawn eye objects
 	// Apply color
 
-	// Step through Box2D
+	// Make eyes when mouse is pressed
+	if (mousePressed) {
+		float sz = random(20, 40);
+		// Will have to change this later
+		eyes.add(new Eye(mouseX, mouseY, sz));
+	}
 
+	// Step through Box2D time
+	box2d.step();
+
+	// Update eye positions
+	for (Eye e: eyes) {
+
+	}
+
+	
+
+	H.drawStage();
+
+	surface.display(); // Draw surface
+
+	for (Eye e: eyes) {
+		e.display(); // Draw all the eye objects		
+	}
+
+	// Delete eyes that have fallen off the screen
+	for (int i = eyes.size()-1; i >= 0; i--) {
+		Eye e = eyes.get(i);
+		if (e.done()) {
+			eyes.remove(i);
+		}
+	}
 
 
 	// saveFrame("frames/#########.tif"); if (frameCount == 900) exit();
