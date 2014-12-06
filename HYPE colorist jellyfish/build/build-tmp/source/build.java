@@ -32,6 +32,7 @@ boolean dev = true;  // If set to true will create file with timestamp
 // Image Credit
 // http://ow.ly/EDPlK
 
+//Consider different orientations
 
 HPixelColorist colors;
 HColorPool colorPool;
@@ -46,7 +47,7 @@ public void setup(){
 
 	colors = new HPixelColorist("jellyfish.jpg");
 
-	for (int i = 0; i < 350; i++) {
+	for (int i = 0; i < 500; i++) {
 
 		HShape d = new HShape("tenta.svg");
 		d
@@ -57,7 +58,7 @@ public void setup(){
 
 		d			
 			.noStroke()
-			.scale(0.75f)
+			.scale(random(0.3f,0.6f))
 			.noFill()
 			// .size( (int)random(25,125) )
 			// .rotate( (int)random(360) )
