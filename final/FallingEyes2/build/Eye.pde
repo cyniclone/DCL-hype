@@ -28,7 +28,7 @@ class Eye {
     // Get screen position
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Check if it's fallen off the bottom of the screen
-    if (pos.y > height+r*2 || pos.x < -(height+r*2) || pos.x > (height+r*2)) {
+    if (pos.y > height+r || pos.x < -(height+r*2) || pos.x > (height+r*2)) {
       println("Removing " + this.shape);
       killBody();
       return true;

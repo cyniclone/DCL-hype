@@ -37,13 +37,12 @@ void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(width/4, height/2, #FFAB25, 0.2f)
-		.addPoint(width/4*3, height/2, #3300FF, 0.2f)
-		.addPoint(width/2, height/2, #E80004, 0.2f)
+		.addPoint(width/4, height/2, #FFAB25, 0.1f)
+		.addPoint(width/4*3, height/2, #3300FF, 0.1f)
+		.addPoint(width/2, height/2, #E80004, 0.1f)
+		.addPoint(width/2, height, #00FF10, 0.1f)
 		.strokeOnly()
 	;
-	
-
 }
  
 void draw(){
@@ -85,10 +84,11 @@ void draw(){
 }
 
 void keyPressed() {
-	for (int i = 0; i < eyes.size(); i++) {
-		Eye e = eyes.get(i);
-		e.killBody();
-		eyes.remove(i);
+	if (key == ' ') {
+		for (int i = 0; i < eyes.size(); i++) {
+			Eye e = eyes.get(i);
+			e.killBody();
+			eyes.remove(i);
+		}
 	}
-
 }

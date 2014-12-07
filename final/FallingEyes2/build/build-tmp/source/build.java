@@ -60,13 +60,12 @@ public void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(width/4, height/2, 0xffFFAB25, 0.2f)
-		.addPoint(width/4*3, height/2, 0xff3300FF, 0.2f)
-		.addPoint(width/2, height/2, 0xffE80004, 0.2f)
+		.addPoint(width/4, height/2, 0xffFFAB25, 0.1f)
+		.addPoint(width/4*3, height/2, 0xff3300FF, 0.1f)
+		.addPoint(width/2, height/2, 0xffE80004, 0.1f)
+		.addPoint(width/2, height, 0xff00FF10, 0.1f)
 		.strokeOnly()
 	;
-	
-
 }
  
 public void draw(){
@@ -76,7 +75,7 @@ public void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = 80;
+		float sz = 75;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
@@ -108,12 +107,13 @@ public void draw(){
 }
 
 public void keyPressed() {
-	for (int i = 0; i < eyes.size(); i++) {
-		Eye e = eyes.get(i);
-		e.killBody();
-		eyes.remove(i);
+	if (key == ' ') {
+		for (int i = 0; i < eyes.size(); i++) {
+			Eye e = eyes.get(i);
+			e.killBody();
+			eyes.remove(i);
+		}
 	}
-
 }
 /* Code adapted from Dan Shiffman's Nature of Code
 // The Nature of Code
@@ -145,7 +145,7 @@ class Eye {
     // Get screen position
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Check if it's fallen off the bottom of the screen
-    if (pos.y > height+r*2 || pos.x < -(height+r*2) || pos.x > (height+r*2)) {
+    if (pos.y > height+r || pos.x < -(height+r*2) || pos.x > (height+r*2)) {
       println("Removing " + this.shape);
       killBody();
       return true;
@@ -234,16 +234,16 @@ class Surface {
 
     // This has to go backwards so that the objects  bounce off the top of the surface
     // This "edgechain" will only work in one direction!
-    for (float x = width+10; x > -100; x -= 5) {
+    for (float x = width+10; x > -10; x -= 5) {
 
       // Doing some stuff with perlin noise to calculate a surface that points down on one side
       // and up on the other
       float y;
       if (x > width/2) {
-        y = 450 + (width - x)*1.1f + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
+        y = 450 + (width - x)*1.5f + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
       } 
       else {
-        y = 450 + x*1.1f + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
+        y = 450 + x*1.5f + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
       }
 
       // Store the vertex in screen coordinates
