@@ -47,7 +47,7 @@ HColorField colorField;
 public void setup(){
 	size(640,640);
 	// frameRate(20);
-	H.init(this).background(0xff202020).autoClear(false);
+	H.init(this).background(0xff202020).autoClear(true);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -113,6 +113,13 @@ public void keyPressed() {
 			e.killBody();
 			eyes.remove(i);
 		}
+	}
+	if (key == 'a' || key == 'A') {
+		while (eyes.size() > 0) {
+			eyes.get(0).killBody();
+			eyes.remove(0);
+		}
+		setup();
 	}
 }
 /* Code adapted from Dan Shiffman's Nature of Code

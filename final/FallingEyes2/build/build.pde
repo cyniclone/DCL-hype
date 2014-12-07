@@ -91,4 +91,11 @@ void keyPressed() {
 			eyes.remove(i);
 		}
 	}
+	if (key == 'a' || key == 'A') {
+		while (eyes.size() > 0) {
+			eyes.get(0).killBody();
+			eyes.remove(0);
+		}
+		setup();
+	}
 }

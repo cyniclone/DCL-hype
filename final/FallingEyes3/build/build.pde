@@ -24,7 +24,7 @@ HColorField colorField;
 void setup(){
 	size(640,640);
 	// frameRate(20);
-	H.init(this).background(#202020).autoClear(true);
+	H.init(this).background(#202020).autoClear(false);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -102,6 +102,11 @@ void keyPressed() {
 		}
 	}
 	if (key == 'a' || key == 'A') {
+		while (eyes.size() > 0) {
+			eyes.get(0).killBody();
+			eyes.remove(0);
+		}
 		setup();
 	}
+
 }
