@@ -23,7 +23,8 @@ HColorField colorField;
 
 void setup(){
 	size(640,640);
-	H.init(this).background(#CCCCCC).autoClear(true);
+	// frameRate(20);
+	H.init(this).background(#202020).autoClear(false);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -36,15 +37,17 @@ void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(width/2, height/2, #FF0066, 0.5f)
+		.addPoint(0, height/2, #FF0066, 0.5f)
+		.addPoint(width, height/2, #3300FF, 0.5f)
 		.fillOnly()
+
 	;
 	
 
 }
  
 void draw(){
-	background(255);
+	background(#202020);
 	// Spawn eye objects
 	// Apply color
 
@@ -65,13 +68,10 @@ void draw(){
 		e.display(); // Draw all the eye objects	
 		colorField.applyColor(e.shape); // Color eyes according to HColorfield	
 	}
-	
 
 	H.drawStage();
 
 	surface.display(); // Draw surface
-
-
 
 	// Delete eyes that have fallen off the screen
 	for (int i = eyes.size()-1; i >= 0; i--) {

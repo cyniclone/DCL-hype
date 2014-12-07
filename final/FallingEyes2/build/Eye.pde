@@ -11,9 +11,10 @@ class Eye {
 
   // ----- CONSTRUCTOR -----
   Eye(float x, float y, float r_) {
-    shape = new HShape("eyeframe.svg");
+    shape = new HShape("eyeframe.svg").enableStyle(false);
     H.add(shape)
-      // .enableStyle(false)
+      
+      .fill(127)
       .anchorAt(H.CENTER)
       .loc(x, y)
     ;
