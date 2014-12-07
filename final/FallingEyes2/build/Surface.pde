@@ -6,7 +6,7 @@
 class Surface {
   // We'll keep track of all of the surface points
   ArrayList<Vec2> surface;
-  final int Y_MAP = 35;
+  final int Y_MAP = 50;
 
   Surface() {
     surface = new ArrayList<Vec2>();
@@ -21,16 +21,16 @@ class Surface {
 
     // This has to go backwards so that the objects  bounce off the top of the surface
     // This "edgechain" will only work in one direction!
-    for (float x = width+10; x > -10; x -= 5) {
+    for (float x = width+10; x > -100; x -= 5) {
 
       // Doing some stuff with perlin noise to calculate a surface that points down on one side
       // and up on the other
       float y;
       if (x > width/2) {
-        y = 420 + (width - x)*1.1 + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
+        y = 450 + (width - x)*1.1 + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
       } 
       else {
-        y = 420 + x*1.1 + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
+        y = 450 + x*1.1 + map(noise(xoff),0,1,-Y_MAP,Y_MAP);
       }
 
       // Store the vertex in screen coordinates

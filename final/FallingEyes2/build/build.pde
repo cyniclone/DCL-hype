@@ -30,7 +30,7 @@ void setup(){
 	// Setup Box2D world and gravity
 	box2d = new Box2DProcessing(this);
 	box2d.createWorld();
-	box2d.setGravity(0, -20);
+	box2d.setGravity(0, -35);
 
 	eyes = new ArrayList<Eye>(); // Initialize ArrayList
 	surface = new Surface(); // Initialize surface
@@ -53,7 +53,7 @@ void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = 90;
+		float sz = 75;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
