@@ -35,14 +35,24 @@ void setup(){
 	eyes = new ArrayList<Eye>(); // Initialize ArrayList
 	surface = new Surface(); // Initialize surface
 
+	// // Initialize HColorField
+	// colorField = new HColorField(width, height)
+	// 	.addPoint(width/4, height/2, #FFAB25, 0.1f)
+	// 	.addPoint(width/4*3, height/2, #3300FF, 0.1f)
+	// 	.addPoint(width/2, height/2, #E80004, 0.1f)
+	// 	.addPoint(width/2, height, #00FF10, 0.1f)
+	// 	.strokeOnly()
+	// ;
+
 	// Initialize HColorField
-	colorField = new HColorField(width, height)
-		.addPoint(width/4, height/2, #FFAB25, 0.1f)
-		.addPoint(width/4*3, height/2, #3300FF, 0.1f)
-		.addPoint(width/2, height/2, #E80004, 0.1f)
-		.addPoint(width/2, height, #00FF10, 0.1f)
-		.strokeOnly()
-	;
+	colorField = new HColorField(width, height).strokeOnly();
+	// Iterate through rows and populate points
+	for (int row = 0; row <= height; row += height/4) {
+		for (int column = 0; column <= width; column += width/4) {
+			color c = color((int)random(255), (int)random(255), (int)random(255));
+			colorField.addPoint(row, column, c, 0.1f);
+		}
+	}
 }
  
 void draw(){
@@ -90,5 +100,8 @@ void keyPressed() {
 			e.killBody();
 			eyes.remove(i);
 		}
+	}
+	if (key == 'a' || key == 'A') {
+		setup();
 	}
 }
