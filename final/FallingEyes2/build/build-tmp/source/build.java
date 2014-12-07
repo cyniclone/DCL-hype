@@ -45,7 +45,7 @@ Surface surface;
 HColorField colorField;
 
 public void setup(){
-	size(640,640);
+	size(1000,1000);
 	// frameRate(20);
 	H.init(this).background(0xff202020).autoClear(false);
 	smooth();
@@ -60,8 +60,9 @@ public void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(0, 0, 0xffFFAB25, 0.5f)
-		.addPoint(width, height, 0xff3300FF, 0.5f)
+		.addPoint(width/4, height/2, 0xffFFAB25, 0.1f)
+		.addPoint(width/4*3, height/2, 0xff3300FF, 0.1f)
+		.addPoint(width/2, height/2, 0xffE80004, 0.1f)
 		.strokeOnly()
 	;
 	
@@ -75,7 +76,7 @@ public void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = 25;
+		float sz = 90;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
@@ -167,12 +168,11 @@ class Eye {
 
     /*pushMatrix();
     translate(pos.x,pos.y);
-    rotate(-a);
+    rotate(-a);          
     fill(175);
     stroke(0);
-    strokeWeight(1);
-    ellipse(0,0,r*2,r*2);
-    line(0,0,r,0);
+    rectMode(CENTER);
+    rect(0,0,r,r);
     popMatrix();*/
 
     shape.loc(pos.x, pos.y).rotation(-degrees(a));
@@ -186,12 +186,16 @@ class Eye {
     bd.type = BodyType.DYNAMIC;
     body = box2d.world.createBody(bd);
 
-    // Body is circular
-    CircleShape cs = new CircleShape();
-    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    // Body is a Box
+    PolygonShape sd = new PolygonShape();
+    float box2dW = box2d.scalarPixelsToWorld(r/2);
+    float box2dH = box2d.scalarPixelsToWorld(r/2);
+    sd.setAsBox(box2dW, box2dH);
+    // CircleShape cs = new CircleShape();
+    // cs.m_radius = box2d.scalarPixelsToWorld(r);
     
     FixtureDef fd = new FixtureDef();
-    fd.shape = cs;
+    fd.shape = sd;
     // Parameters that affect physics
     fd.density = 1;
     fd.friction = 0.01f;

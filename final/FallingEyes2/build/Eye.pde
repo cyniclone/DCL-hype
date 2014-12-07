@@ -51,12 +51,11 @@ class Eye {
 
     /*pushMatrix();
     translate(pos.x,pos.y);
-    rotate(-a);
+    rotate(-a);          
     fill(175);
     stroke(0);
-    strokeWeight(1);
-    ellipse(0,0,r*2,r*2);
-    line(0,0,r,0);
+    rectMode(CENTER);
+    rect(0,0,r,r);
     popMatrix();*/
 
     shape.loc(pos.x, pos.y).rotation(-degrees(a));
@@ -70,12 +69,16 @@ class Eye {
     bd.type = BodyType.DYNAMIC;
     body = box2d.world.createBody(bd);
 
-    // Body is circular
-    CircleShape cs = new CircleShape();
-    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    // Body is a Box
+    PolygonShape sd = new PolygonShape();
+    float box2dW = box2d.scalarPixelsToWorld(r/2);
+    float box2dH = box2d.scalarPixelsToWorld(r/2);
+    sd.setAsBox(box2dW, box2dH);
+    // CircleShape cs = new CircleShape();
+    // cs.m_radius = box2d.scalarPixelsToWorld(r);
     
     FixtureDef fd = new FixtureDef();
-    fd.shape = cs;
+    fd.shape = sd;
     // Parameters that affect physics
     fd.density = 1;
     fd.friction = 0.01;

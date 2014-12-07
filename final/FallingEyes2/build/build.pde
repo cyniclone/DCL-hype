@@ -37,8 +37,9 @@ void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(0, 0, #FFAB25, 0.5f)
-		.addPoint(width, height, #3300FF, 0.5f)
+		.addPoint(width/4, height/2, #FFAB25, 0.2f)
+		.addPoint(width/4*3, height/2, #3300FF, 0.2f)
+		.addPoint(width/2, height/2, #E80004, 0.2f)
 		.strokeOnly()
 	;
 	
@@ -52,7 +53,7 @@ void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = 25;
+		float sz = 90;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
