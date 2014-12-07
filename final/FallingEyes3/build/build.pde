@@ -24,7 +24,7 @@ HColorField colorField;
 void setup(){
 	size(640,640);
 	// frameRate(20);
-	H.init(this).background(#202020).autoClear(false);
+	H.init(this).background(0).autoClear(false);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -56,7 +56,7 @@ void setup(){
 }
  
 void draw(){
-	background(#202020);
+	background(0);
 	// Spawn eye objects
 	// Apply color
 
