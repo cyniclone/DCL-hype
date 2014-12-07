@@ -35,6 +35,7 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Check if it's fallen off the bottom of the screen
     if (pos.y > height+r*2) {
+      H.remove(this.shape); // This removes the HShape from the stage
       killBody();
       return true;
     }
@@ -47,7 +48,6 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Get its angle of rotation
     float a = body.getAngle();
-    println(degrees(a));
 
     pushMatrix();
     translate(pos.x,pos.y);

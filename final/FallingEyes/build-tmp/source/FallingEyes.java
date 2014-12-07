@@ -43,7 +43,7 @@ Surface surface;
 
 public void setup(){
 	size(640,640);
-	H.init(this).background(0xff202020).autoClear(false);
+	H.init(this).background(0xff202020).autoClear(true);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -62,7 +62,7 @@ public void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = random(20, 40);
+		float sz = 20;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
@@ -90,6 +90,7 @@ public void draw(){
 		Eye e = eyes.get(i);
 		if (e.done()) {
 			eyes.remove(i);
+			//TODO: Find a way to remove the HDrawable/HShape from the stage
 		}
 	}
 
@@ -133,6 +134,7 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Check if it's fallen off the bottom of the screen
     if (pos.y > height+r*2) {
+      // H.remove(this.shape);
       killBody();
       return true;
     }
@@ -145,7 +147,6 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Get its angle of rotation
     float a = body.getAngle();
-    println(degrees(a));
 
     pushMatrix();
     translate(pos.x,pos.y);
@@ -256,7 +257,7 @@ class Surface {
   // A simple function to just draw the edge chain as a series of vertex points
   public void display() {
     strokeWeight(2);
-    stroke(0);
+    stroke(255);
     noFill();
     beginShape();
     for (Vec2 v: surface) {
@@ -264,7 +265,6 @@ class Surface {
     }
     endShape();
   }
-
 }
 
   static public void main(String[] passedArgs) {

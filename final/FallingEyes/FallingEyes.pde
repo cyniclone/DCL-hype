@@ -20,7 +20,7 @@ Surface surface;
 
 void setup(){
 	size(640,640);
-	H.init(this).background(#202020).autoClear(false);
+	H.init(this).background(#202020).autoClear(true);
 	smooth();
 
 	// Setup Box2D world and gravity
@@ -39,7 +39,7 @@ void draw(){
 
 	// Make eyes when mouse is pressed
 	if (mousePressed) {
-		float sz = random(20, 40);
+		float sz = 20;
 		// Will have to change this later
 		eyes.add(new Eye(mouseX, mouseY, sz));
 	}
@@ -67,6 +67,7 @@ void draw(){
 		Eye e = eyes.get(i);
 		if (e.done()) {
 			eyes.remove(i);
+			//TODO: Find a way to remove the HDrawable/HShape from the stage
 		}
 	}
 
