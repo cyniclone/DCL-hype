@@ -60,8 +60,8 @@ public void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(0, height/2, 0xffFFAB25, 0.5f)
-		.addPoint(width, height/2, 0xff3300FF, 0.5f)
+		.addPoint(0, 0, 0xffFFAB25, 0.5f)
+		.addPoint(width, height, 0xff3300FF, 0.5f)
 		.strokeOnly()
 	;
 	
