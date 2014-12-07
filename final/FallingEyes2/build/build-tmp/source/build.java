@@ -60,10 +60,9 @@ public void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(0, height/2, 0xffFF0066, 0.5f)
+		.addPoint(0, height/2, 0xffFFAB25, 0.5f)
 		.addPoint(width, height/2, 0xff3300FF, 0.5f)
-		.fillOnly()
-
+		.strokeOnly()
 	;
 	
 
@@ -104,9 +103,16 @@ public void draw(){
 			//TODO: Find a way to remove the HDrawable/HShape from the stage
 		}
 	}
-
-
 	// saveFrame("frames/#########.tif"); if (frameCount == 900) exit();
+}
+
+public void keyPressed() {
+	for (int i = 0; i < eyes.size(); i++) {
+		Eye e = eyes.get(i);
+		e.killBody();
+		eyes.remove(i);
+	}
+
 }
 /* Code adapted from Dan Shiffman's Nature of Code
 // The Nature of Code
@@ -123,8 +129,7 @@ class Eye {
   Eye(float x, float y, float r_) {
     shape = new HShape("eyeframe.svg").enableStyle(false);
     H.add(shape)
-      
-      .fill(127)
+      .fill(0)
       .anchorAt(H.CENTER)
       .loc(x, y)
     ;
@@ -140,7 +145,6 @@ class Eye {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Check if it's fallen off the bottom of the screen
     if (pos.y > height+r*2 || pos.x < -(height+r*2) || pos.x > (height+r*2)) {
-      H.remove(this.shape); // This removes the HShape from the stage
       println("Removing " + this.shape);
       killBody();
       return true;
@@ -151,6 +155,7 @@ class Eye {
   // ----- DESTROY BOX2D BODY ----------
   public void killBody() {
     box2d.destroyBody(body);
+    H.remove(this.shape); // This removes the HShape from the stage
   }
 
   // ----- DISPLAY ----------

@@ -37,10 +37,9 @@ void setup(){
 
 	// Initialize HColorField
 	colorField = new HColorField(width, height)
-		.addPoint(0, height/2, #FF0066, 0.5f)
+		.addPoint(0, height/2, #FFAB25, 0.5f)
 		.addPoint(width, height/2, #3300FF, 0.5f)
-		.fillOnly()
-
+		.strokeOnly()
 	;
 	
 
@@ -81,7 +80,14 @@ void draw(){
 			//TODO: Find a way to remove the HDrawable/HShape from the stage
 		}
 	}
-
-
 	// saveFrame("frames/#########.tif"); if (frameCount == 900) exit();
+}
+
+void keyPressed() {
+	for (int i = 0; i < eyes.size(); i++) {
+		Eye e = eyes.get(i);
+		e.killBody();
+		eyes.remove(i);
+	}
+
 }
