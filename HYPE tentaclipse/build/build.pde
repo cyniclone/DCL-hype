@@ -2,7 +2,7 @@
 import processing.pdf.*;
 
 // Output configuration
-boolean vectorOutput = false;
+boolean vectorOutput = true;
 int pngScale = 2;
 boolean dev = true;  // If set to true will create file with timestamp
 
