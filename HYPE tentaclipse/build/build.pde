@@ -35,7 +35,7 @@ HColorPool comp = new HColorPool(#EEBAA0,#E1A788,#E3AA8B,#F5D5C3,#DF9C76,#F3CAB2
 //Birdy Nam Nam
 HColorPool bnam = new HColorPool(#6D5B42,#68684D,#64774C,#3A462D,#547843,#47753C,#1D3A1B,#356636,#152919,#221434,#492563,#3A1D4E,#58276A,#761F63,#AE206E,#771A4B,#B4266D,#7A1E4B,#A9316A,#AF1957,#85435E,#432D35,#592937,#720726,#88505D,#563C3D);
 
-HColorPool c = bnam;
+HColorPool c = circus;
 
 	for (int i = 0; i < 120; i++) {
 		HShape d = new HShape("tenta.svg");
@@ -48,7 +48,7 @@ HColorPool c = bnam;
 		.loc(random(width), random(height))
 		.rotation(random(360))
 		// .scale(random(2,2.5));
-		.scale(0.75);
+		.scale(random(0.75, 1.5));
 		d.randomColors(c.fillOnly());
 
 	}
